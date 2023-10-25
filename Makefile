@@ -1,21 +1,25 @@
-# Setup virtual environment
-setup:
-	python3 -m venv env
-	# source env/bin/activate
-
-# install all the packages
 install:
-	./env/bin/pip install --upgrade pip &&\
-		./env/bin/pip install -r requirements.txt
-
-lint:
-	./env/bin/ruff check --fix .
-
-format:	
-	./env/bin/black *.py 
+	rustup update &&\
+		cargo build --release
 
 test:
-	./env/bin/python -m pytest test_main.py 
-	
-		
-all: setup install lint format test 
+	cargo test
+
+format:	
+	cargo fmt
+
+lint:
+	cargo clippy
+
+# container-lint:
+# 	docker run --rm -i hadolint/hadolint < ./.devcontainer/Dockerfile
+
+refactor: format lint
+
+run:
+	cargo run --bin database
+
+deploy:
+	cargo run --bin database
+
+all: install lint test format refactor deploy

@@ -1,0 +1,17 @@
+[package]
+name = "rust_data_processing"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+openssl = { version = "0.10", features = ["vendored"] }
+reqwest = "0.11"
+tokio = { version = "1", features = ["full"] }
+csv = "1.1.6"
+rusqlite = "0.29"
+
+[[bin]]
+name = "database"
+path = "src/database.rs"
