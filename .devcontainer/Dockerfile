@@ -1,16 +1,9 @@
-# .devcontainer/Dockerfile
-FROM python:3.8
+FROM ubuntu:18.04
 
-# Configure the environment
-ENV PYTHONUNBUFFERED 1
+WORKDIR /home/
 
-# Install any necessary dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential
+COPY . .
 
-# Set the working directory
-WORKDIR /workspace
+RUN bash ./setup.sh
 
-# Install Python dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+ENV PATH="/root/.cargo/bin:$PATH"
