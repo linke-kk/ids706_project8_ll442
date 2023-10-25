@@ -1,8 +1,11 @@
 # virtual environment
-env/
+# env/
 
 # log file
 # my_log.txt
 
 # cache file
 __pycache__/
+
+# Cargo build file
+target/
